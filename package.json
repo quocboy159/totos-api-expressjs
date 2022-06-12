@@ -4,17 +4,21 @@
   "private": true,
   "scripts": {
     "start": "nodemon --exec babel-node ./bin/www",
-    "init-db": "nodemon --exec babel-node src/helpers/initialize-db.helpers"
+    "test": "nodemon --exec mocha --require @babel/register \"src/**/*.test.js\"",
+    "init-db": "nodemon --exec babel-node src/helpers/initialize-db.helpers cross-env DB_HOST=mongodb+srv://quocboy159:nKvsvDKQtyOQsJ6G@cluster0.9tw8l7w.mongodb.net/?retryWrites=true&w=majority"
   },
   "dependencies": {
     "@babel/core": "^7.18.2",
     "@babel/node": "^7.17.10",
     "@babel/preset-env": "^7.18.2",
+    "@babel/runtime": "^7.18.3",
     "body-parser": "^1.20.0",
     "chai": "^4.3.6",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
+    "//cross-env": "use it to set env variable in command line",
+    "cross-env": "^7.0.3", 
     "debug": "~2.6.9",
     "dotenv": "^16.0.1",
     "express": "~4.16.1",
@@ -26,6 +30,7 @@
     "supertest": "^6.2.3"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.18.2",
     "nodemon": "^2.0.16"
   }
 }
