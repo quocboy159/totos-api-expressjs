@@ -30,6 +30,7 @@ describe('users controllers', async => {
         const { status, body } = await request(app).get('/users');
 
         expect(status).to.equal(200);
+        expect(Array.isArray(body)).to.true;
         expect(users.length).to.equal(body.length);
     });
 
