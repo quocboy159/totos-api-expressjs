@@ -1,5 +1,5 @@
-import { getAllUsers, findUserById, createUser } from '../services/users.services';
-import { getRequestError } from '../helpers/validation.helpers'; 
+import { getAllUsers, findUserById, createUser, editUser } from '../services/users.services';
+import { validateRequest } from '../helpers/validation.helpers';
 
 const getAll = async (req, res) => {
     const result = await getAllUsers();
@@ -12,8 +12,8 @@ const getUserById = async (req, res) => {
 }
 
 const addUser = async (req, res) => {
-    const errors = getRequestError(req);
-    if(errors.length){
+    const errors = validateRequest(req);
+    if (errors.length) {
         return res.status(400).json({ errors });
     }
 
@@ -27,4 +27,24 @@ const addUser = async (req, res) => {
     res.status(200).json(result);
 }
 
-export { getAll, getUserById, addUser };
+const updateUser = async (req, res) => {
+    const errors = validateRequest(req);
+    if (errors.length) {
+        return res.status(400).json({ errors });
+    }
+
+    try {
+        await editUser(req.params.id, {
+            name: req.body.name,
+            password: req.body.password,
+            phoneNumber: req.body.phoneNumber
+        })
+
+        res.status(200).json({ id: req.params.id });
+    }
+    catch (error) {
+        return res.status(500).send({ error });
+    }
+}
+
+export { getAll, getUserById, addUser, updateUser };

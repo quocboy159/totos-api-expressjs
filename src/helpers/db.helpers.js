@@ -8,7 +8,7 @@ const connectDb = async () => {
             return dbInstance;
         }
 
-        dbInstance = await mongoose.connect(databaseConfigs.dbHost, { dbName: 'todos' });
+        dbInstance = await mongoose.connect(databaseConfigs.dbHost, { dbName: 'todos', autoIndex: false });
         console.log("Database Connected");
         return dbInstance;
     } catch (ex) {

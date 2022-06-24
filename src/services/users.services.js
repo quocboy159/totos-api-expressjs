@@ -2,9 +2,16 @@ import userEntity from '../models/user'
 
 const getAllUsers = async () => await userEntity.find().exec();
 
-const createUser = async(userRequest) => {
+const createUser = async (userRequest) => {
     const user = new userEntity(userRequest);
     return await user.save();
+}
+
+const editUser = async (id, editUserRequest) => {
+    const result =  await userEntity.updateOne({ _id: id }, editUserRequest);
+    if(!result.matchedCount){
+        throw 'The user not found';
+    }
 }
 
 const findUserById = async (id) => {
@@ -25,6 +32,7 @@ export {
     findUserByEmail,
     findUserById,
     getAllUsers,
-    createUser
+    createUser,
+    editUser
 }
 

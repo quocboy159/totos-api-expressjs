@@ -1,10 +1,10 @@
 import { validationResult } from "express-validator";
 
-const getRequestError = (request) => {
+const validateRequest = (request) => {
     const errors = validationResult(request);
     return errors.array();
 }
 
 export {
-    getRequestError
+    validateRequest
 }
