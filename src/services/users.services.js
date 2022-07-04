@@ -8,10 +8,12 @@ const createUser = async (userRequest) => {
 }
 
 const editUser = async (id, editUserRequest) => {
-    const result =  await userEntity.updateOne({ _id: id }, editUserRequest);
-    if(!result.matchedCount){
+    const result =  await userEntity.findByIdAndUpdate(id, editUserRequest);
+    if(!result){
         throw 'The user not found';
     }
+
+    return result;
 }
 
 const findUserById = async (id) => {

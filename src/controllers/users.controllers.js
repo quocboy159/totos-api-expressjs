@@ -34,13 +34,13 @@ const updateUser = async (req, res) => {
     }
 
     try {
-        await editUser(req.params.id, {
+        var result = await editUser(req.params.id, {
             name: req.body.name,
             password: req.body.password,
             phoneNumber: req.body.phoneNumber
         })
 
-        res.status(200).json({ id: req.params.id });
+        res.status(200).json(result);
     }
     catch (error) {
         return res.status(500).send({ error });
